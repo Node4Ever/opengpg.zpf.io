@@ -15,13 +15,14 @@
   "homepage": "/",
   "dependencies": {
     "availity-reactstrap-validation": "^2.7.0",
+    "bootstrap-icons": "^1.2.2",
     "openpgp": "^4.10.9",
     "react": "^17.0.1",
+    "react-bootstrap-icons": "^1.2.2",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
-    "reactstrap": "^8.7.1",
-    "zepto": "^1.2.0"
+    "reactstrap": "^8.7.1"
   },
   "browserslist": {
     "production": [
