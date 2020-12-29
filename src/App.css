@@ -1,7 +1,15 @@
 .App {
+    position: absolute;
+    max-height: 500px;
+    top: 22%;
+
     text-align: center;
     font-family: "Courier New", monospace;
     width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .App { top: 11%; }
 }
 
 h1 {
@@ -40,7 +48,16 @@ section#page {
 
 textarea#gpgTextBox {
     height: 300px;
-    width: 100%;
+    width: 90%;
     min-width: 300px;
     max-height: 800px;
+}
+
+section#shoutbox {
+    background: #d9defa;
+    color: darkblue;
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 21em;
 }

@@ -96,6 +96,10 @@ class App extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <section id="shoutbox">
+                            <p>A <a href="https://www.phpexperts.pro/" target="_blank"><strong>PHP Experts, Inc.</strong></a> project.</p>
+                            <div><a href="https://github.com/Node4Ever/opengpg.zpf.io" target="_blank"><strong>GitHub repository</strong></a></div>
+                        </section>
                     </div>
                 </div>
             </section>
