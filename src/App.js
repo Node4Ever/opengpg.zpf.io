@@ -10,20 +10,25 @@ class App extends React.Component {
         super();
 
         // bind `this` to the methods.
-        this.handleDecrypt = this.handleDecrypt.bind(this);
-        this.handleEncrypt = this.handleEncrypt.bind(this);
+        this.handleInputClick = this.handleInputClick.bind(this);
+        this.handleDecrypt    = this.handleDecrypt.bind(this);
+        this.handleEncrypt    = this.handleEncrypt.bind(this);
 
         this.symmetricalDecrypt = this.symmetricalDecrypt.bind(this);
         this.symmetricalEncrypt = this.symmetricalEncrypt.bind(this);
 
         // Set up Field refs.
-        this.gpgTextBox = React.createRef();
+        this.gpgTextBox   = React.createRef();
         this.passkeyInput = React.createRef();
     }
 
     componentDidMount() {
         this.gpgTextBox.current.value = '';
         this.passkeyInput.current.value = '';
+    }
+
+    handleInputClick(event) {
+        event.target.select();
     }
 
     handleDecrypt() {
@@ -74,9 +79,9 @@ class App extends React.Component {
                     <h1>Node4Ever GPG Speaker</h1>
                     <div><img src="/logo.png" title="Node4Ever GPG Speaker" alt="Node4Ever GPG Speaker" width="150" height="150" /></div>
                     <div>
-                        <div><textarea id="gpgTextBox" ref={this.gpgTextBox} /></div>
+                        <div><textarea id="gpgTextBox" ref={this.gpgTextBox} onClick={this.handleInputClick} /></div>
                         <div>
-                            <label>Passkey: <input type="text" id="passkey" ref={this.passkeyInput} /></label>
+                            <label>Passkey: <input type="text" id="passkey" ref={this.passkeyInput} onClick={this.handleInputClick} /></label>
                         </div>
                         <div className="container">
                             <div className="row">
