@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-import { Clipboard, ClipboardCheck } from 'react-bootstrap-icons';
 
 import * as openpgp from 'openpgp';
 
+import ClipboardCopier from './components/ClipboardCopier';
 
 import './App.css';
 
@@ -12,11 +12,9 @@ class App extends React.Component {
         super();
 
         // bind `this` to the methods.
-        this.handleCopy       = this.handleCopy.bind(this);
         this.handleInputClick = this.handleInputClick.bind(this);
         this.handleDecrypt    = this.handleDecrypt.bind(this);
         this.handleEncrypt    = this.handleEncrypt.bind(this);
-        this.handleNewText    = this.handleNewText.bind(this);
 
         this.symmetricalDecrypt = this.symmetricalDecrypt.bind(this);
         this.symmetricalEncrypt = this.symmetricalEncrypt.bind(this);
@@ -24,36 +22,15 @@ class App extends React.Component {
         // Set up Field refs.
         this.gpgTextBox   = React.createRef();
         this.passkeyInput = React.createRef();
-
-        this.state = {
-            clipboard: [<Clipboard />, " Copy"]
-        };
-
-        this.copied = false;
     }
 
     componentDidMount() {
-        this.gpgTextBox.current.value = 'Hello, World!';
-        this.passkeyInput.current.value = 'Erica!';
-    }
-
-    handleCopy() {
-        this.gpgTextBox.current.select();
-        document.execCommand('copy');
-
-        this.setState({clipboard: [<ClipboardCheck />, " Copied"]});
-        this.copied = true;
+        this.gpgTextBox.current.value = '';
+        this.passkeyInput.current.value = '';
     }
 
     handleInputClick(event) {
         event.target.select();
-    }
-
-    handleNewText() {
-        if (this.copied === true) {
-            this.setState({clipboard: [<Clipboard/>, " Copy"]});
-            this.copied = false;
-        }
     }
 
     handleDecrypt() {
@@ -101,8 +78,8 @@ class App extends React.Component {
         <Container>
             <section className="App">
                 <div>
-                    <h1>Node4Ever GPG Speaker</h1>
-                    <div><img src="/logo.png" title="Node4Ever GPG Speaker" alt="Node4Ever GPG Speaker" width="150" height="150" /></div>
+                    <h2>GPG Speaker</h2>
+                    <h4>Encrypt/Decrypt GPG Symmetrically</h4>
                     <div>
                         <div><textarea id="gpgTextBox" ref={this.gpgTextBox} onClick={this.handleInputClick} onChange={this.handleNewText} /></div>
                         <div>
@@ -115,7 +92,7 @@ class App extends React.Component {
                                 </div>
                                 <div className="col md-7">
                                     <button className="btn btn-success" onClick={this.handleDecrypt}>Symmetric Decrypt</button>
-                                    <button className="btn btn-secondary" onClick={this.handleCopy}>{this.state.clipboard}</button>
+                                    <ClipboardCopier targetText={this.gpgTextBox} />
                                 </div>
                             </div>
                         </div>
