@@ -37,3 +37,10 @@ section#page {
     margin: 0 auto;
     padding: 20px;
 }
+
+textarea#gpgTextBox {
+    height: 300px;
+    width: 100%;
+    min-width: 300px;
+    max-height: 800px;
+}

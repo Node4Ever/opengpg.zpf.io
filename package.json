@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "Quickly and easily encrypt and decrypt PGP/GPG messages directly in your browser.",
   "private": false,
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Node4Ever/GPGSpeaker.git"
@@ -40,5 +34,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
