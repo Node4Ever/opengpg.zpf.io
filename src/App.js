@@ -2,9 +2,6 @@ import React from 'react';
 import { Container } from 'reactstrap';
 
 import * as openpgp from 'openpgp';
-// import openpgp } from '../node_modules/openpgp/dist/openpgp.min.js';
-// Set the relative web worker path
-// openpgp.initWorker({ path: 'openpgp.worker.js' });
 
 import './App.css';
 
@@ -13,6 +10,7 @@ class App extends React.Component {
         super();
 
         // bind `this` to the methods.
+        this.handleDecrypt = this.handleDecrypt.bind(this);
         this.handleEncrypt = this.handleEncrypt.bind(this);
 
         this.symmetricalDecrypt = this.symmetricalDecrypt.bind(this);
@@ -24,9 +22,12 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        // @FIXME: Remove this scaffold data.
-        this.gpgTextBox.current.value = 'Hello, World!';
-        this.passkeyInput.current.value = 'Erica!';
+        this.gpgTextBox.current.value = '';
+        this.passkeyInput.current.value = '';
+    }
+
+    handleDecrypt() {
+        this.symmetricalDecrypt(this.gpgTextBox.current.value, this.passkeyInput.current.value);
     }
 
     handleEncrypt() {
@@ -52,21 +53,15 @@ class App extends React.Component {
         })();
     }
 
-    symmetricalDecrypt() {
+    symmetricalDecrypt(armoredText, passkey) {
         (async () => {
-            const { message } = await openpgp.encrypt({
-                message: openpgp.message.fromBinary(new Uint8Array([0x01, 0x01, 0x01])), // input as Message object
-                passwords: ['secret stuff'],                                             // multiple passwords possible
-                armor: false                                                             // don't ASCII armor (for Uint8Array output)
-            });
-            const encrypted = message.packets.write(); // get raw encrypted packets as Uint8Array
-
             const { data: decrypted } = await openpgp.decrypt({
-                message: await openpgp.message.read(encrypted), // parse encrypted bytes
-                passwords: ['secret stuff'],                    // decrypt with password
-                format: 'binary'                                // output as Uint8Array
+                message: await openpgp.message.readArmored(armoredText), // parse encrypted bytes
+                passwords: [passkey],                    // decrypt with password
+                format: 'utf8'
             });
-            console.log(decrypted); // Uint8Array([0x01, 0x01, 0x01])
+
+            this.gpgTextBox.current.value = decrypted;
         })();
     }
 
@@ -83,8 +78,15 @@ class App extends React.Component {
                         <div>
                             <label>Passkey: <input type="text" id="passkey" ref={this.passkeyInput} /></label>
                         </div>
-                        <div>
-                            <button className="btn btn-primary" onClick={this.handleEncrypt}>Symmetric Encrypt</button>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col md-6">
+                                    <button className="btn btn-primary" onClick={this.handleEncrypt}>Symmetric Encrypt</button>
+                                </div>
+                                <div className="col md-6">
+                                    <button className="btn btn-success" onClick={this.handleDecrypt}>Symmetric Decrypt</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
