@@ -1,0 +1,13 @@
+version: '3.6'
+# Requires Docker v18.02 or higher.
+
+services:
+  db:
+    image: mariadb:10.5
+    volumes:
+      - /var/lib/docker/mariadb/mindstream:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme!
+      MYSQL_DATABASE: mindstream
+    ports:
+      - 3306:3306

@@ -1,0 +1,16 @@
+{
+  "short_name": "Mindstream App",
+  "name": "Node4Ever GPG Speaker",
+  "description": "Quickly and easily encrypt and decrypt PGP/GPG messages directly in your browser.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "228x228",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

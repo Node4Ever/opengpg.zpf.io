@@ -1,0 +1,5 @@
+.env
+frontend/build/
+frontend/.eslintcache
+.idea/
+node_modules/
